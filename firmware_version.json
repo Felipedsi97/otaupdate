@@ -1,4 +1,4 @@
 {
   "version": "2.0",
-  "url": "https://your-server.com/firmware.bin"
+  "url": "https://github.com/Felipedsi97/otaupdate/raw/refs/heads/main/blink_only.bin"
 }
