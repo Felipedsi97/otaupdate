@@ -5,9 +5,10 @@
 #include "esp_log.h"
 #include "esp_crt_bundle.h"
 
-
+//if you create a local http server, you can set the json path as below
+//#define UPDATE_URL "http://192.168.0.10/update_file.json"
 #define UPDATE_URL "https://raw.githubusercontent.com/Felipedsi97/otaupdate/refs/heads/main/firmware_version.json"
-#define VERSION_CURRENT "3.0"  // Replace with dynamic version if preferred
+#define VERSION_CURRENT "2.0"  // Replace with dynamic version if preferred
 
 static const char *TAG = "OTA_JSON";
 
@@ -16,11 +17,16 @@ esp_err_t _http_event_handler(esp_http_client_event_t *evt) {
 }
 
 void perform_ota(const char *url) {
+    if (strncmp(UPDATE_URL, "https://", 8) != 0) {
+        ESP_LOGE("OTA", "Can't update de device, HTTP connection denied");
+        return;
+    }
+    
     esp_http_client_config_t http_config = {
         .url = url,
         .event_handler = _http_event_handler,
         //comment two lines below and set allow ota http in menuconfig to skip https validation
-        //.use_global_ca_store = true,
+        .use_global_ca_store = true,
         .crt_bundle_attach = esp_crt_bundle_attach
     };
 
@@ -45,12 +51,11 @@ bool is_newer_version(const char *new_version) {
 void check_for_update() {
     //ESP_ERROR_CHECK(esp_tls_init_global_ca_store());
 
-    
     esp_http_client_config_t config = {
         .url = UPDATE_URL,
         .event_handler = _http_event_handler,
         //comment two lines below and set allow ota http in menuconfig to skip https validation
-        //.use_global_ca_store = true,
+        .use_global_ca_store = true,
         .crt_bundle_attach = esp_crt_bundle_attach,
     };
 
@@ -97,6 +102,7 @@ void check_for_update() {
         const cJSON *url = cJSON_GetObjectItemCaseSensitive(json, "url");
         if (cJSON_IsString(ver) && cJSON_IsString(url)) {
             ESP_LOGI(TAG, "Latest version: %s", ver->valuestring);
+            ESP_LOGI(TAG, "Device version: %s", VERSION_CURRENT);
             if (is_newer_version(ver->valuestring)) {
                 ESP_LOGI(TAG, "New version found! Starting OTA...");
                 perform_ota(url->valuestring);
