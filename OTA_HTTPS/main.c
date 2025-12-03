@@ -29,7 +29,7 @@ void ota_update(void *pvParameter) {
 	while(1) {
     ESP_LOGI(TAG, "Starting OTA version check...");
     check_for_update();
-    vTaskDelay(5000 / portTICK_PERIOD_MS);
+    vTaskDelay(60000 / portTICK_PERIOD_MS);
     }
 }
 
@@ -41,20 +41,23 @@ void blink_task(void *pvParameter) {
     gpio_set_direction(BLINK_GPIO, GPIO_MODE_OUTPUT);
     while(1) {
         gpio_set_level(BLINK_GPIO, 0);
-        vTaskDelay(2000 / portTICK_PERIOD_MS);
+        vTaskDelay(200 / portTICK_PERIOD_MS);
         gpio_set_level(BLINK_GPIO, 1);
-        vTaskDelay(2000 / portTICK_PERIOD_MS);
+        vTaskDelay(200 / portTICK_PERIOD_MS);
     }
 }
 
 void monitor_task(void *pvParameters) {
     char stats[2048];
+    //int count = 0; if you need to count iterations (* times the task is in running state)
     while (1) {
         vTaskGetRunTimeStats(stats);
         ESP_LOGI("MONITOR", "\nTask CPU Usage:\n%s", stats);
         UBaseType_t watermark = uxTaskGetStackHighWaterMark(monitor_task_handle);  // NULL = current task
         printf("Stack high watermark: %u words\n", watermark);
-        vTaskDelay(30000 / portTICK_PERIOD_MS);
+        //ESP_LOGI("iteration", "%d", ++count);
+        vTaskDelay(60000 / portTICK_PERIOD_MS);
+        
     }
 }
 
@@ -69,6 +72,16 @@ void app_main(void)
         ESP_ERROR_CHECK(ret);
 
     wifi_init_sta();
+
+    // After peripherals startup, you can set rollback validation, only use if you need rollback
+    /*
+    esp_err_t ota_ret = esp_ota_mark_app_valid_cancel_rollback();
+    if (ota_ret == ESP_OK) {
+        ESP_LOGI(TAG, "Firmware marked as valid, rollback canceled.");
+    } else {
+        ESP_LOGE(TAG, "Failed to mark firmware valid: %s", esp_err_to_name(ota_ret));
+    }
+    */
     xTaskCreate(&blink_task, "blink_task", 2048, NULL, 5, NULL);
     xTaskCreate(&ota_update,   // Pointer to your task function
             "ota_update",      // Task name (for debugging)
