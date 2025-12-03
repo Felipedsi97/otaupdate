@@ -8,8 +8,8 @@
 #include "esp_netif.h"
 #include "esp_wifi.h"
 
-#define WIFI_SSID       ""
-#define WIFI_PASSWORD   ""
+#define WIFI_SSID       "youwifissdhere"
+#define WIFI_PASSWORD   "yourwifipasshere"
 #define WIFI_CONNECTED_BIT BIT0
 
 static const char *TAG = "wifi_sta";
