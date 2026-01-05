@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial ESP32 - Preparação do Ambiente</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background-color: #1a1a1a;
+        }
+
+        header {
+            background: linear-gradient(135deg, #4a5fd4 0%, #5a3d7a 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Montserrat', sans-serif;
+            
+            
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            background: #2d2d2d;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        section {
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            color: #8b9aff;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #8b9aff;
+        }
+
+        h3 {
+            color: #a98fd4;
+            font-size: 1.4rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #3a3a3a 0%, #4a4a4a 100%);
+            border: 2px dashed #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            color: #999;
+            font-size: 1.1rem;
+        }
+
+        .material-list {
+            background: #383838;
+            padding: 1.5rem;
+            border-left: 4px solid #8b9aff;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+
+        .material-list ul, .software-list ul {
+            list-style-position: inside;
+            padding-left: 1rem;
+        }
+
+        .material-list li, .software-list li {
+            margin-bottom: 0.5rem;
+            padding: 0.3rem 0;
+        }
+
+        .software-list {
+            background: #3d3420;
+            padding: 1.5rem;
+            border-left: 4px solid #ffb84d;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+
+        .note {
+            background: #1e3a52;
+            padding: 1rem;
+            border-left: 4px solid #4dabf7;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .note strong {
+            color: #74c0fc;
+        }
+
+        .responsive-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: #1a1a1a;
+            color: #888;
+            margin-top: 3rem;
+            border-top: 1px solid #3a3a3a;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1.2rem;
+            }
+
+            p {
+                text-align: left;
+            }
+
+            .image-placeholder {
+                height: 200px;
+                font-size: 0.9rem;
+            }
+
+            .material-list, .software-list, .note {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 1.5rem 1rem;
+            }
+
+            header h1 {
+                font-size: 1.5rem;
+                font-family: 'Montserrat', sans-serif;
+            }
+
+            header p {
+                font-size: 0.9rem;
+            }
+
+            .container {
+                margin: 0.5rem;
+                padding: 1rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+
+            h3 {
+                font-size: 1.1rem;
+            }
+
+            .image-placeholder {
+                height: 150px;
+                font-size: 0.85rem;
+            }
+
+            section {
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Implementação FOTA no ESP32</h1>
+        <h4>Atualização de firmware over-the-air no ESP32</h4>
+    </header>
+
+    <div class="container">
+        <section>
+            <h2>Material Necessário</h2>
+            <div class="material-list">
+                <ul>
+                    <li>Placa de desenvolvimento com SoC ESP32</li>
+                    <li>PC</li>
+                    <li>Rede Wi-Fi</li>
+                </ul>
+            </div>
+            <img src="img/esp.png" alt="Placa de desenvolvimento ESP32" class="responsive-image">
+        </section>
+
+        <section>
+            <h2>Softwares</h2>
+            <div class="software-list">
+                <ul>
+                    <li>VSCode</li>
+                    <li>Extensão ESP-IDF (Python incluído)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Preparação do Ambiente</h2>
+            
+            <h3>Instalação do VSCode e ESP-IDF</h3>
+            <div class="note">
+                <strong>Nota:</strong> Mantenha o dispositivo ESP32 conectado ao computador durante o processo de instalação.
+            </div>
+            <p>Instale o Microsoft VSCode e siga para a instalação da extensão ESP-IDF a partir do menu lateral "extensões". A extensão ESP-IDF contém todas as dependências para criar projetos para ESP32, inclusive o Python. Após a instalação da extensão, um wizard de instalação será aberto automaticamente, com opções de escolha para diferentes modos de instalação do ESP-IDF.</p>
+            
+            <img src="img/installation.png" alt="VSCode com extensão ESP-IDF" class="responsive-image">
+            <img src="img/installation2.png" alt="VSCode com extensão ESP-IDF" class="responsive-image">
+
+            <p>Para este guia, utilizaremos a opção "Expresso", que instala automaticamente todas as dependências. A próxima tela permite a seleção do servidor, versão e local de instalação, sendo ambos a critério do usuário. Para a criação do guia e dos respectivos códigos, foi utilizada a versão 5.5.1 do framework ESP-IDF.</p>
+
+            <h3>Configuração do Dispositivo USB</h3>
+            <p>Um adaptador USB‑UART é um pequeno chip ou cabo que permite que a porta USB de um computador se conecte aos pinos UART de um dispositivo. Embora ambos sejam “seriais”, o USB utiliza um protocolo complexo baseado em pacotes que os computadores entendem, enquanto o UART é apenas um fluxo bruto de bytes com bits de início/parada. O adaptador é necessário para traduzir entre esses dois formatos, permitindo que o PC se comunique diretamente com dispositivos seriais simples, como microcontroladores.</p>
+            <p>Ao conectar o dispositivo ESP32 por meio da interface USB, é necessário identificar se o dispositivo está sendo reconhecido no sistema como um dispositivo de comunicação serial. Acesse o gerenciador de tarefas do Windows e, caso não tenha um dispositivo reconhecido conforme imagem abaixo, instale o driver do dispositivo USB-UART específico.</p>
+            <img src="img/devicewindows.png" alt="Gerenciador de Dispositivos do Windows" class="responsive-image">
+
+            <div class="note">
+                <strong>Nota:</strong> Existe a possibilidade da placa de desenvolvimento não conter um conversor USB-UART embutido, sendo necessário utilizar um circuito externo. Geralmente, as placas de desenvolvimento têm conector USB e possuem o circuito de comunicação embutido.
+            </div>
+
+            <p>Identifique o fabricante do chip USB-UART (geralmente <b>CH340 da WCH</b> ou <b>CP2102 da Silicon Labs</b>.) e faça a instalação do driver do dispositivo em questão. Após isso, o dispositivo está preparado para se comunicar com o computador.</p>
+
+            <h3>Criação do Projeto</h3>
+            <p>Crie um projeto novo ou utilize um template para dar início ao projeto. Com o projeto criado e aberto, é possível identificar a tela conforme imagem a seguir.</p>
+            <div class="note">
+                <strong>Nota:</strong> Para fins de simplificação, pode ser utilizado o projeto template "blink_example" e editar os arquivos .c e .h após a criação do projeto.
+            </div>
+            
+            <img src="img/project_folders.png" alt="Tela do projeto ESP-IDF no VSCode" class="responsive-image">
+            <p>Os arquivos dentro da pasta "main" contém or arquivos fonte e de cabeçalho, sendo os únicos arquivos de manutenção necessários para o funcionamento do projeto. Existem outros arquivos importantes para otimizar o projeto, como configuração de defaults e limpeza de bibliotecas que não são o foco do tutorial, mas podem ser explorados para melhor entendimento.</p>
+            <p>As configurações do dispositivo ESP32 são realizadas através da imagem do campo "menuconfig" conforme imagem abaixo.</p>
+            <div class="note">
+                <strong>Nota:</strong> Verifique se a porta serial no ESP-IDF está nas mesma porta a qual o ESP32 está conectado (COM1, COM2, COM3 etc.).
+            </div>
+            <img src="img/menuconfig.png" alt="Tela do projeto ESP-IDF no VSCode" class="responsive-image">
+            
+
+            <h3>Bootloader</h3>
+            <p>Um componente chave para a inicialização de um dispositivo digital que executa um firmware ou um sistema operacional é o bootloader. O bootloader é um pequeno bloco de software que viabiliza a inicialização de um sistema operacional ou firmware e permite a execução de atualizações. Além de preparar o ambiente de hardware para a execução do sistema, ele pode incluir mecanismos de segurança para garantir a integridade do processo, validar assinaturas digitais e oferecer suporte a atualizações remotas, como as realizadas via FOTA. Em sistemas embarcados, desempenha um papel fundamental na comunicação entre os componentes de hardware e software, assegurando uma transição eficiente entre o estado de inicialização e o funcionamento pleno do dispositivo</p>
+            <p>A imagem abaixo demonstra as 3 variações mais comuns de implementação de bootloader. Bootloader unificado ao firmware, bootloader fixo e separado na memória ROM e bootloader dividido em dois estágios na memória ROM e FLASH. A abordagem mais à direita apresenta maior flexibilidade e robustez e é a abordagem implementada no ESP32, conhecida como bootloader em duas etapas ou dois estágios. Dessa maneira, o bootloader de primeiro estágio é imutável e alocado na memória ROM, permitindo que o dispositivo sempre inicialize os recursos necessários para o funcionamento. Já o bootloader de segundo estágio, é alocado na memória flash e modificável, sendo responsável por recursos de implementação a critério do desenvolvedor. Recursos de segurança e até mesmo a funcionalidade de atualização OTA, são incluídas nesta porção de código.</p>
+            <img src="img/bootloader.png" alt="Tela do projeto ESP-IDF no VSCode" class="responsive-image">
+            <p>A memória flash do ESP32 pode ser organizada de acordo com a necessidade. Por padrão, a partir do endereço 0x8000, encontra-se a tabela de particões do dispositivo e as outras partições definidas pelo desenvolvedor/framework seguem conforme imagem a seguir. O bootloader fica localizado antes do endereço 0x8000 e, de acordo com a quantidade de recursos implementados, o tamanho desta porção de código aumenta. A seguir, a organização da memória flash para a implementação deste tutorial.</p>
+            <img src="img/partitiontableoffset.png" alt="Tela do projeto ESP-IDF no VSCode" class="responsive-image">
+            
+            
+            
+            <h3>Estrutura do projeto e fluxo de execução</h3>
+            <p>O projeto necessita de dois arquivos para realizar a atualização, sendo o firmware e um arquivo JSON para informar a versão e localização do binário.</p>
+            <img src="img/json.png" alt="Tela do projeto ESP-IDF no VSCode" class="responsive-image">
+            
+            <p>A atualização OTA consiste em modificar o firmware/bootloader do dispositivo remotamente, geralmente por uma conexão sem fio. Nesta Implementação, busca-se atualizar o ESP32 e garantir a requisitos mínimos de segurança sejam garantidos. A segurança no processo de atualização pode ser resumida nas seguintes etapas: 
+            empacotamento, transmissão, recepção/instalação e manutenção.</p>
+            <p>O empacotamento consiste no ato de gerar o binário do firmware, relacionado ao ambiente de criação e as práticas utilizadas na ato da criação do binário. Através do protocolo HTTPS na transmissão, é possivel garantir a segurança nesta etapa, que consiste no transporte do arquivo entre o hospedeiro e o dispositivo. Quando o dispositivo recebe o firmware, é necessário validar se o arquivo está íntegro e se é o arquivo que se espera. A manutenção consiste de práticas utilizadas para a mitigação de vulnerabilidades após a instalação.</p>
+            <p>A seguir, o fluxograma do processo de atualização OTA.</p>
+            <img src="img/scheme.png" alt="Tela do projeto ESP-IDF no VSCode" class="responsive-image">
+            
+
+            <h3>Segurança</h3>
+            <p>Através da implementação OTA proposta, é possível garantir a segurança nos processos de transmissão e recepção, assim como relacionar com a tríade de ciberssegurança, conforme imagem a seguir.</p>
+            <img src="img/cid.png" alt="Tela do projeto ESP-IDF no VSCode" class="responsive-image">
+            <p>Práticas utilizadas como verificação de assinatura de código e verificação de integridade, são geralmente incluídas na funcionalidade chamada inicialização segura (secure boot).</p>
+            <p>Mesmo com as protecões de integridade, existe um mecanismo que faz uso das duas partições criadas anteriormente para evitar a parada do dispositivo em caso de falha no processo por outros motivos como, por exemplo, o desligamento do equipamento no momento de atualização. A funcionalidade de rollback de firmware funciona como um último caso de proteção, mas também pode ser utilizada a critério do desenvolvedor.</p>
+            <p> O rollback de aplicação no ESP32 é um mecanismo de segurança projetado para manter o dispositivo operacional após atualizações OTA, permitindo o retorno automático à versão anterior quando a nova aplicação apresenta problemas críticos. Este sistema funciona através de estados que o bootloader utiliza para determinar qual versão da aplicação deve ser carregada durante a inicialização. A flag responsável por habilitar o rollback de firmware é listada abaixo. </p> <pre><code> CONFIG_BOOTLOADER_APP_ROLLBACK_ENABLE </code></pre> 
+            <p></p>
+            <p> Quando uma atualização OTA é instalada, a aplicação pode seguir três caminhos distintos: se funcionar corretamente, ela chama <em>esp_ota_mark_app_valid_cancel_rollback()</em> para marcar-se com estado <em>ESP_OTA_IMG_VALID</em>, confirmando sua estabilidade; se detectar erros críticos que impedem seu funcionamento, executa <em>esp_ota_mark_app_invalid_rollback_and_reboot()</em> para marcar-se como <em>ESP_OTA_IMG_INVALID</em> e reiniciar, forçando o bootloader a carregar a versão anterior; ou, caso a opção <em>CONFIG_BOOTLOADER_APP_ROLLBACK_ENABLE</em> esteja habilitada e ocorra um reset sem que nenhuma função de validação tenha sido chamada, o rollback acontece automaticamente como medida preventiva. </p> <p> O fluxo recomendado envolve realizar diagnósticos na primeira inicialização após a atualização, validando explicitamente a aplicação em caso de sucesso ou acionando o rollback manualmente em caso de falha. Para situações onde a aplicação não consegue nem executar devido a travamentos, abortos ou perdas de energia, o próprio bootloader detecta a anomalia na próxima tentativa de boot e realiza o rollback automaticamente, marcando a versão problemática como inválida e restaurando a aplicação anterior que estava funcionando, garantindo assim a recuperação do dispositivo sem intervenção manual <cite>Espressif</cite>. </p>
+
+
+            <h3>Implementação</h3>
+            <p> Para a crição do projeto de atualização OTA, foi utilizado o FreeRTOS, já contido no ESP-IDF. Através das estruturas de tasks, event groups e run stats, a implementação fica mais organizada e permite a preempção de tarefas e a troca de contexto simples e eficaz. O overhead de um OS não será tratado neste projeto, mas deve ser levado em conta para diferentes casos.
+            <p>As funções dos arquivos do projeto são explicadas brevemente a seguir.</p> 
+            <h4>Funções do projeto</h4>
+            <p><ul> <li><strong>wifi_sta.c:</strong> arquivo com as funções destinadas a conectar o dispositivo ESP32 ao Wi-Fi.</li> <li><strong>wifi_sta.h:</strong> arquivo de cabeçalho com a declaração das funções do <em>wifi_sta.c</em>.</li> <li><strong>ota_functions.c:</strong> arquivo com as funções destinadas a realizar a atualização OTA.</li> <li><strong>ota_functions.h:</strong> arquivo de cabeçalho com a declaração das funções do <em>ota_functions.c</em>.</li> <li><strong>main.c:</strong> arquivo responsável pela criação das tarefas, loops e execução das funções.</li> </ul></p>
+            <p><ul> <li><strong>wifi_event_handler:</strong> reage aos eventos do Wi-Fi (conectar, desconectar e obter IP).</li> <li><strong>wifi_init_sta:</strong> configura e inicia a conexão Wi-Fi do ESP32.</li> <li><strong>_http_event_handler:</strong> trata eventos básicos da conexão HTTP.</li> <li><strong>perform_ota:</strong> realiza a atualização OTA e reinicia o dispositivo se for bem-sucedida.</li> <li><strong>is_newer_version:</strong> compara versões para saber se há atualização disponível.</li> <li><strong>check_for_update:</strong> verifica no servidor se existe uma nova versão e inicia a OTA se necessário.</li> <ul> <li><strong>ota_update:</strong> verifica periodicamente se há nova versão e inicia a atualização OTA.</li> <li><strong>blink_task:</strong> pisca o LED conectado ao pino configurado.</li> <li><strong>monitor_task:</strong> mostra estatísticas de uso da CPU e da pilha das tarefas.</li> <li><strong>app_main:</strong> inicializa memória NVS, conecta ao Wi-Fi e cria as tarefas principais.</li></ul></p>
+            
+            <p>Para seguir com a implementação, é necessário utilizar os arquivos fornecidos e substituí-los dentro da pasta main informada anteriormente. Os trechos de código referente as credenciais de Wi-Fi e localização/versão do arquivo JSON devem ser alterados conforme necessidade. Lembrando que o firmware hospedado precisa ter o valor do campo "VERSION_CURRENT" maior que o valor utilizado no firmware contido no dispositivo.</p>
+            <p>As flags de sistema alteradas pelo menuconfig, são explicadas a seguir e devem ser alteradas conforme orientado.</p>
+            <h4>Flags de configuração</h4>
+            <p>
+                <ul> <li><strong>Flash Size:</strong> utilizada para definir o tamanho da memória flash do dispositivo, dentro do recurso disponível na placa utilizada. Para o projeto, foram utilizados 4 MiB.</li> <li><strong>HTTPS:</strong> utilizada para definir as estruturas de conexão e autenticação via HTTPS. Opção deve ser marcada. </li> <li><strong>Partition Table:</strong> define como a memória flash será dividida. Neste caso, utilizando o modo "Factory app, two OTA definitions".</li> <li><strong>Offset of partition table:</strong> endereço utilizado para definir a tabela de partições. Se o tamanho do bootloader exceder o limite, será necessário alterar o deslocamento da tabela de partição. Deve ser alterado para 0x10000 neste projeto.</li> <li><strong>Enable trusted root certificate bundle:</strong> o ESP32 utiliza uma lista de certificados previamente carregada para autenticação TLS. Por exemplo, é possível verificar sites já conhecidos como o Github sem a necessidade de gerar um certificado digital. Sugere-se que seja habilitada. </li> <li><strong>Require signed app images:</strong> define a necessidade de binários assinados. Deve ser habilitada. </li> <li><strong>Bootloader verifies app signatures:</strong> verifica a assinatura no binário antes de inicializá-lo. Deve ser marcada. </li> <li><strong>Verify app signature on update:</strong> habilita a verificação de assinatura de código ao atualizar o dispositivo. Também deve ser marcada.</li> <li><strong>Sign binaries during build:</strong> efetua a assinatura do binário automaticamente no processo de build de acordo com o arquivo .pem.</li> <li><strong>Secure boot private signing key:</strong> define o nome do certificado utilizado para a assinatura de código. É importante manter o arquivo .pem na raíz do projeto. O processo para gerar esse arquivo será mostrado mais a frente.</li> <li><strong>configGENERATE RUN TIME STATS:</strong> habilita estruturas do FreeRTOS para obter estatísticas na execução das tarefas. Sugere-se marcar, útil para colher dados em tempo de execução.</li> </ul>
+            </p>
+            <p>A última etapa envolve a criação de um certificado para assinar o firmware e ser utilizado pelo bootloader para verificação. O ESP-IDF fornece um módulo e comando para a geração deste arquivo. Basta abrir o terminal do ESP-IDF e digitar "idf.py secure-generate-signing-key secure_boot_v1_key". O arquivo será gerado no diretório ao qual o terminal se encontra no momento do comando. Certifique-se de deixar o arquivo na raíz do projeto e utilize o mesmo nome utilizado no campo "Secure boot private signing key", comentado anteriormente.</p>
+            <p>Com os arquivos fonte e de cabeçalho substituídos, certificado gerado e configurações alteradas, basta gravar os firmwares para efetuar o teste. Basta compilar as duas versões, gravar no dispositivo a versão atual e hospedar o binário da versão incrementada com o .json. O .bin da do firmware fica localizado dentro da basta build, com o mesmo nome do projeto.</p>
+            <p>Se tudo ocorreu conforme o esperado, espera-se que o dispositivo reinicie e execute o firmware recebido.</p>
+            
+            
+
+            <h3>Conclusão e tópicos a serem explorados</h3>
+            <p>Na implementação OTA deste guia, foi configurado e implementado um bootloader de dois estágios no ESP32 para efetuar atualizações OTA. As particões foram organizadas de modo a garantir que existam dois slots na flash para o firmware recebido, garantindo o processo de rollback em caso de falha no processo de atualização. O firmware é transmitido ao dispositivo por meio da pilha TCP/IP, especificamente utilizando HTTPS na camada de aplicação e Wi-Fi na camada de enlace/física. Os mecanismos de verificação de assinatura de código foram implementados em uma abordagem para um cenário de desenvolvimento, com a chave pública da criptografia simétrica armazenada juntamente ao bootloader na flash. Em um cenário de produção, o ESP32 fornece mecanismos que podem ser gravados uma única vez e previnem adulteração da chave, recurso chamado eFuses. Além disso, a criptografia de flash pode auxiliar com protecões contra engenharia reversa.</p>
+            <p>No geral, a implementação fornecida apresenta controle de versão por meio do arquivo JSON, segurança na transmissão e recepção, assim como robutez a falhas no processo, o que caracteriza um parâmetro mínimo para implementações FOTA.</p>
+            <p>Diferentes infraestruturas/protocolos podem ser exploradas, levando em consideração throughput, segurança e latência. LoRa/LoRaWAN e MQTT são exemplos.</p>
+       
+        
+        <a href="https://github.com/Felipedsi97/otaupdate" target="_blank">Endereço com arquivos do projeto.</a>
+        </section>
+        
+    </div>
+
+    <footer>
+        <p>&copy; FOTA no ESP32 - Felipe dos Santos</p>
+    </footer>
+</body>
+</html>
